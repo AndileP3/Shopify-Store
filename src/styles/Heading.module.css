@@ -19,7 +19,10 @@
   color: #333;
   gap: 8px;
 }
-
+.logoImage{
+  height: 50px;
+  width: auto;
+}
 .searchBox {
   flex: 1;
   display: flex;
