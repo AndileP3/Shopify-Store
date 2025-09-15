@@ -2,6 +2,7 @@ import { gql, request } from "graphql-request";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../styles/MultiProduct.module.css";
+import { useSearch } from "./SearchContext"; // import context
 
 const URL = "https://vintage-store-team.myshopify.com/api/2025-07/graphql.json";
 const STOREFRONT_TOKEN = "98f04c2261ef3843b0bcb76dd76a4cac";
@@ -57,9 +58,10 @@ const getProducts = async () => {
   }
 };
 
+
 const MultiProduct = () => {
   const [products, setProducts] = useState<any[]>([]);
-  const [search, setSearch] = useState("");
+  const { search } = useSearch(); // use shared search
 
   useEffect(() => {
     (async () => {

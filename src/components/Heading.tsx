@@ -2,14 +2,20 @@ import React from "react";
 import styles from "../styles/Heading.module.css";
 import logo from "../assets/logo.png";
 import { useSearch } from "./SearchContext";
+import { useNavigate } from "react-router-dom";
 
 const Heading: React.FC = () => {
   const { search, setSearch } = useSearch();
+  const navigate = useNavigate();
+
+  const handleLogoClick = () => {
+    navigate("/products"); // route to MultiProduct page
+  };
 
   return (
     <header className={styles.header}>
       {/* Logo */}
-      <div className={styles.logo}>
+      <div className={styles.logo} onClick={handleLogoClick} style={{ cursor: "pointer" }}>
         <img src={logo} alt="Vintage Store Logo" className={styles.logoImage} />
       </div>
 
