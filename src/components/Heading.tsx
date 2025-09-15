@@ -1,18 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../styles/Heading.module.css";
 import logo from "../assets/logo.png";
 
 const Heading: React.FC = () => {
+  const [search, setSearch] = useState("");
+
+  // Store search globally (using localStorage for simplicity)
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+    localStorage.setItem("searchQuery", e.target.value);
+    window.dispatchEvent(new Event("storage")); // trigger update
+  };
+
   return (
     <header className={styles.header}>
       {/* Logo */}
- <div className={styles.logo}>
-    <img src={logo} alt="Vintage Store Logo" className={styles.logoImage} />
-  </div>
+      <div className={styles.logo}>
+        <img src={logo} alt="Vintage Store Logo" className={styles.logoImage} />
+      </div>
 
       {/* Search */}
       <div className={styles.searchBox}>
-        <input type="text" placeholder="Search Items, Brands, & Categories" />
+        <input
+          type="text"
+          placeholder="Search Items, Brands, & Categories"
+          value={search}
+          onChange={handleChange}
+        />
       </div>
 
       {/* Cart */}
