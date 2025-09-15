@@ -8,15 +8,24 @@ const STOREFRONT_TOKEN = "98f04c2261ef3843b0bcb76dd76a4cac";
 
 const QUERY = gql`
   {
-    products(first: 10) {
+    products(first: 20) {
       edges {
         node {
           id
           title
-          descriptionHtml
           featuredImage {
             url
             altText
+          }
+          priceRange {
+            minVariantPrice {
+              amount
+              currencyCode
+            }
+            maxVariantPrice {
+              amount
+              currencyCode
+            }
           }
         }
       }
@@ -66,24 +75,34 @@ const MultiProduct = () => {
         <p>Loading...</p>
       ) : (
         <div className={styles.grid}>
-          {filteredProducts.map((product) => (
-            <div key={product.id} className={styles.card}>
-              {product.featuredImage && (
-                <img
-                  src={product.featuredImage.url}
-                  alt={product.featuredImage.altText || product.title}
-                  className={styles.image}
+          {filteredProducts.map((product) => {
+            const minPrice = product.priceRange.minVariantPrice;
+            const maxPrice = product.priceRange.maxVariantPrice;
+            const priceLabel =
+              minPrice.amount === maxPrice.amount
+                ? `${minPrice.amount} ${minPrice.currencyCode}`
+                : `${minPrice.amount} - ${maxPrice.amount} ${minPrice.currencyCode}`;
+
+            return (
+              <div key={product.id} className={styles.card}>
+                {product.featuredImage && (
+                  <img
+                    src={product.featuredImage.url}
+                    alt={product.featuredImage.altText || product.title}
+                    className={styles.image}
+                  />
+                )}
+                <h3>{product.title}</h3>
+                <p className={styles.price}>{priceLabel}</p>
+                <div
+                  dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
                 />
-              )}
-              <h3>{product.title}</h3>
-              <div
-                dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
-              />
-              <Link to={`/product/${encodeURIComponent(product.id)}`}>
-                View Details
-              </Link>
-            </div>
-          ))}
+                <Link to={`/product/${encodeURIComponent(product.id)}`}>
+                 Buy Now
+                </Link>
+              </div>
+            );
+          })}
         </div>
       )}
     </div>

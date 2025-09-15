@@ -17,6 +17,16 @@ const getProductById = async (id: string) => {
           url
           altText
         }
+        priceRange {
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+          maxVariantPrice {
+            amount
+            currencyCode
+          }
+        }
       }
     }
   `;
@@ -52,6 +62,10 @@ const SingleProduct = () => {
 
   if (!product) return <p>Loading product...</p>;
 
+  const minPrice = product.priceRange.minVariantPrice.amount;
+  const maxPrice = product.priceRange.maxVariantPrice.amount;
+  const currency = product.priceRange.minVariantPrice.currencyCode;
+
   return (
     <div className={styles.container}>
       {product.featuredImage && (
@@ -61,8 +75,24 @@ const SingleProduct = () => {
           className={styles.image}
         />
       )}
-      <h2>{product.title}</h2>
-      <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
+
+      <div className={styles.content}>
+        <h2>{product.title}</h2>
+
+        <p className={styles.price}>
+          {minPrice} {currency}
+          {maxPrice !== minPrice && (
+            <> - {maxPrice} {currency}</>
+          )}
+        </p>
+
+        <div
+          className={styles.description}
+          dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+        />
+
+        <button className={styles.button}>Add to Cart</button>
+      </div>
     </div>
   );
 };
