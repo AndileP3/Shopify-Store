@@ -1,16 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "../styles/Heading.module.css";
 import logo from "../assets/logo.png";
+import { useSearch } from "./SearchContext";
 
 const Heading: React.FC = () => {
-  const [search, setSearch] = useState("");
-
-  // Store search globally (using localStorage for simplicity)
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-    localStorage.setItem("searchQuery", e.target.value);
-    window.dispatchEvent(new Event("storage")); // trigger update
-  };
+  const { search, setSearch } = useSearch();
 
   return (
     <header className={styles.header}>
@@ -25,28 +19,12 @@ const Heading: React.FC = () => {
           type="text"
           placeholder="Search Items, Brands, & Categories"
           value={search}
-          onChange={handleChange}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
       {/* Cart */}
-      <div className={styles.cart}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <circle cx="9" cy="21" r="1" />
-          <circle cx="20" cy="21" r="1" />
-          <path d="M1 1h4l2 8h12l2-8h4" />
-        </svg>
-      </div>
+      <div className={styles.cart}>🛒</div>
     </header>
   );
 };
