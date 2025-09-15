@@ -13,6 +13,7 @@ const getProductById = async (id: string) => {
         id
         title
         descriptionHtml
+        productType
         featuredImage {
           url
           altText
@@ -25,6 +26,18 @@ const getProductById = async (id: string) => {
           maxVariantPrice {
             amount
             currencyCode
+          }
+        }
+        variants(first: 10) {      # fetch first 10 variants
+          edges {
+            node {
+              id
+              title
+              selectedOptions {
+                name
+                value
+              }
+            }
           }
         }
       }
@@ -46,6 +59,7 @@ const getProductById = async (id: string) => {
     return null;
   }
 };
+
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -79,13 +93,32 @@ const SingleProduct = () => {
       <div className={styles.content}>
         <h2>{product.title}</h2>
 
+        {/* Category */}
+        {product.productType && (
+          <p className={styles.category}>Category: {product.productType}</p>
+        )}
+
+        {/* Price */}
         <p className={styles.price}>
           {minPrice} {currency}
-          {maxPrice !== minPrice && (
-            <> - {maxPrice} {currency}</>
-          )}
+          {maxPrice !== minPrice && <> - {maxPrice} {currency}</>}
         </p>
 
+        {/* Variants */}
+        {product.variants.edges.length > 0 && (
+          <div className={styles.variants}>
+            <h4>Variants:</h4>
+            <ul>
+              {product.variants.edges.map((v: any) => (
+                <li key={v.node.id}>
+                  {v.node.selectedOptions.map((o: any) => `${o.name}: ${o.value}`).join(", ")}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Description */}
         <div
           className={styles.description}
           dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
@@ -96,5 +129,6 @@ const SingleProduct = () => {
     </div>
   );
 };
+
 
 export default SingleProduct;
