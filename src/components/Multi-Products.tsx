@@ -7,31 +7,34 @@ const URL = "https://vintage-store-team.myshopify.com/api/2025-07/graphql.json";
 const STOREFRONT_TOKEN = "98f04c2261ef3843b0bcb76dd76a4cac";
 
 const QUERY = gql`
-  {
-    products(first: 20) {
-      edges {
-        node {
-          id
-          title
-          featuredImage {
-            url
-            altText
+{
+  products(first: 20) {
+    edges {
+      node {
+        id
+        title
+        featuredImage {
+          url
+          altText
+        }
+        productType  # <-- This is the category like T-Shirt, Socks
+        priceRange {
+          minVariantPrice {
+            amount
+            currencyCode
           }
-          priceRange {
-            minVariantPrice {
-              amount
-              currencyCode
-            }
-            maxVariantPrice {
-              amount
-              currencyCode
-            }
+          maxVariantPrice {
+            amount
+            currencyCode
           }
         }
       }
     }
   }
+}
 `;
+
+
 
 const getProducts = async () => {
   try {
@@ -84,23 +87,24 @@ const MultiProduct = () => {
                 : `${minPrice.amount} - ${maxPrice.amount} ${minPrice.currencyCode}`;
 
             return (
-              <div key={product.id} className={styles.card}>
-                {product.featuredImage && (
-                  <img
-                    src={product.featuredImage.url}
-                    alt={product.featuredImage.altText || product.title}
-                    className={styles.image}
-                  />
-                )}
-                <h3>{product.title}</h3>
-                <p className={styles.price}>{priceLabel}</p>
-                <div
-                  dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+            <div key={product.id} className={styles.card}>
+            {product.featuredImage && (
+                <img
+                src={product.featuredImage.url}
+                alt={product.featuredImage.altText || product.title}
+                className={styles.image}
                 />
-                <Link to={`/product/${encodeURIComponent(product.id)}`}>
-                 Buy Now
-                </Link>
-              </div>
+            )}
+            <h3>{product.title}</h3>
+            <p className={styles.price}>R{priceLabel}</p>
+
+            {product.productType && (
+                <p className={styles.category}>{product.productType}</p>
+            )}
+            <Link to={`/product/${encodeURIComponent(product.id)}`}>Buy Now</Link>
+            </div>
+
+
             );
           })}
         </div>

@@ -18,13 +18,13 @@
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: left;
+  text-align: left;
   cursor: pointer;
 }
 
 .card:hover {
-  transform: translateY(-6px);
+
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
@@ -46,22 +46,37 @@
 .price {
   font-size: 1.05rem;
   font-weight: 700;
-  color: #8d0b41; /* primary accent */
+  color: #07bc37; /* primary accent */
   margin: 0.25rem 0 0.75rem 0;
 }
 
 .card a {
   display: inline-block;
   padding: 0.5rem 1.2rem;
-  border-radius: 8px;
-  background: #8d0b41;
-  color: #fff;
+  border-radius: 30px;
+  border: 2px solid #292929;
+  background: transparent;
+  color: #444444;
   text-decoration: none;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
   transition: background 0.2s ease;
+  align-items: center;
+  text-align: center;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+   margin-top: auto; 
 }
 
 .card a:hover {
-  background: #7a0e3c;
+  color: #fff;
+  border: 2px solid #924a4a;
+  background: #772247;
+}
+.category {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 0.5rem;
 }
