@@ -9,7 +9,7 @@ const Heading: React.FC = () => {
   const navigate = useNavigate();
 
   const handleLogoClick = () => {
-    navigate("/products"); // route to MultiProduct page
+    navigate("/"); // route to MultiProduct page
   };
 
   return (
