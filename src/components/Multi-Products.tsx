@@ -73,46 +73,48 @@ const MultiProduct = () => {
   const filteredProducts = products.filter((p) =>
     p.title.toLowerCase().includes(search.toLowerCase())
   );
+return (
+  <div className={styles.container}>
+    {filteredProducts.length === 0 ? (
+      <p>Loading...</p>
+    ) : (
+      <div className={styles.grid}>
+        {filteredProducts.map((product) => {
+          const minPrice = product.priceRange.minVariantPrice;
+          const maxPrice = product.priceRange.maxVariantPrice;
+          const priceLabel =
+            minPrice.amount === maxPrice.amount
+              ? `${minPrice.amount} ${minPrice.currencyCode}`
+              : `${minPrice.amount} - ${maxPrice.amount} ${minPrice.currencyCode}`;
 
-  return (
-    <div className={styles.container}>
-      {filteredProducts.length === 0 ? (
-        <p>Loading...</p>
-      ) : (
-        <div className={styles.grid}>
-          {filteredProducts.map((product) => {
-            const minPrice = product.priceRange.minVariantPrice;
-            const maxPrice = product.priceRange.maxVariantPrice;
-            const priceLabel =
-              minPrice.amount === maxPrice.amount
-                ? `${minPrice.amount} ${minPrice.currencyCode}`
-                : `${minPrice.amount} - ${maxPrice.amount} ${minPrice.currencyCode}`;
+          return (
+            <Link
+              key={product.id}
+              to={`/product/${encodeURIComponent(product.id)}`}
+              className={styles.cardLink} // new class for full-card link
+            >
+              <div className={styles.card}>
+                {product.featuredImage && (
+                  <img
+                    src={product.featuredImage.url}
+                    alt={product.featuredImage.altText || product.title}
+                    className={styles.image}
+                  />
+                )}
+                <h3>{product.title}</h3>
+                <p className={styles.price}>R{priceLabel}</p>
 
-            return (
-            <div key={product.id} className={styles.card}>
-            {product.featuredImage && (
-                <img
-                src={product.featuredImage.url}
-                alt={product.featuredImage.altText || product.title}
-                className={styles.image}
-                />
-            )}
-            <h3>{product.title}</h3>
-            <p className={styles.price}>R{priceLabel}</p>
-
-            {product.productType && (
-                <p className={styles.category}>{product.productType}</p>
-            )}
-            <Link to={`/product/${encodeURIComponent(product.id)}`}>Buy Now</Link>
-            </div>
-
-
-            );
-          })}
-        </div>
-      )}
-    </div>
-  );
+                {product.productType && (
+                  <p className={styles.category}>{product.productType}</p>
+                )}
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+    )}
+  </div>
+);
 };
 
 export default MultiProduct;
