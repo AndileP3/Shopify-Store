@@ -3,6 +3,7 @@ import Heading from "./components/Heading";
 import MultiProduct from "./components/Multi-Products";
 import SingleProduct from "./components/Single-Product";
 import { SearchProvider } from "./components/SearchContext";
+import Filtering from "./components/Filtering";
 
 export const App = () => {
   return (
@@ -10,6 +11,7 @@ export const App = () => {
     <SearchProvider>
       
       <Heading />
+       <Filtering />
       <Routes>
         <Route path="/" element={<MultiProduct />} />
         <Route path="/product/:id" element={<SingleProduct />} />
