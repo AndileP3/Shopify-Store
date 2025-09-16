@@ -1,0 +1,46 @@
+.filterWrapper {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.tabButton {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #555;
+  cursor: pointer;
+  padding: 6px 0;
+  transition: color 0.2s ease, border-bottom 0.2s ease;
+}
+
+.tabButton:hover {
+  color: #0070f3;
+}
+
+.active {
+  color: #0070f3;
+  border-bottom: 2px solid #0070f3;
+}
+
+/* Image display */
+.imageContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.imageContainer img {
+  width: 100%;
+  height: 200px;
+    object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
