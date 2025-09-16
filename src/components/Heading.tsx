@@ -3,6 +3,7 @@ import styles from "../styles/Heading.module.css";
 import logo from "../assets/logo.png";
 import { useSearch } from "./SearchContext";
 import { useNavigate } from "react-router-dom";
+import { FaHeart, FaShoppingCart } from "react-icons/fa"; 
 
 const Heading: React.FC = () => {
   const { search, setSearch } = useSearch();
@@ -29,8 +30,11 @@ const Heading: React.FC = () => {
         />
       </div>
 
-      {/* Cart */}
-      <div className={styles.cart}>🛒</div>
+      {/* Icons */}
+        <div className={styles.icons}>
+          <FaHeart className={styles.icon} title="Wishlist" />
+          <FaShoppingCart className={styles.icon} title="Cart" />
+        </div>
     </header>
   );
 };
