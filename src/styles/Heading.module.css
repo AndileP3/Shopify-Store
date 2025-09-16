@@ -56,3 +56,95 @@
   transform: scale(1.1);
   color: #0070f3;
 }
+
+/* Wrapper for header + tabs */
+.headerWrapper {
+  background: #fff;
+  border-bottom: 1px solid #eaeaea;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Top Row */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logoImage {
+  height: 50px;
+  width: auto;
+}
+
+.searchBox {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  margin: 0 20px;
+}
+.searchBox input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  outline: none;
+  font-size: 0.95rem;
+  transition: all 0.2s ease-in-out;
+}
+.searchBox input:focus {
+  border-color: #0070f3;
+  box-shadow: 0 0 5px rgba(0, 112, 243, 0.3);
+}
+
+/* Icons */
+.icons {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.icon {
+  font-size: 1.4rem;
+  color: #333;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.icon:hover {
+  transform: scale(1.1);
+  color: #0070f3;
+}
+
+/* Bottom Row Tabs */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 10px 0;
+  border-top: 1px solid #f0f0f0;
+  background: #fafafa;
+}
+
+.tabButton {
+  background: none;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.2s ease, border-bottom 0.2s ease;
+  padding: 6px 0;
+}
+.tabButton:hover {
+  color: #0070f3;
+  border-bottom: 2px solid #0070f3;
+}
+
