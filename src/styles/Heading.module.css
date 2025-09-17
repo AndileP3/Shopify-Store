@@ -2,11 +2,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: transparent; /* make transparent */
+  background: transparent;
   padding: 12px 24px;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.scrolled {
+  background: #fff; /* turn white on scroll */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .logoImage {
@@ -14,15 +22,15 @@
   width: auto;
 }
 
-/* keep icons same */
 .icons {
   display: flex;
   gap: 16px;
   align-items: center;
 }
+
 .icon {
   font-size: 1.4rem;
-  color: #fff; /* white for visibility */
+  color: #333; /* darker when white bg */
   cursor: pointer;
   transition: transform 0.2s ease, color 0.2s ease;
 }
@@ -33,33 +41,35 @@
 
 .searchBox input {
   width: 100%;
-  max-width: 400px;
-  padding: 10px 14px;
-  border: 1px solid #fff;
+  max-width: 300px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
   border-radius: 25px;
   outline: none;
-  font-size: 0.95rem;
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
+  font-size: 0.9rem;
 }
 
-.searchBox input::placeholder {
-  color: #eee;
-}
-
-.searchBox input:focus {
-  border-color: #ffcc00;
-  box-shadow: 0 0 5px rgba(255, 204, 0, 0.6);
-}
-.header {
+.tabs {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: transparent; /* overlay on image */
-  padding: 12px 24px;
-  position: fixed;      /* sit above filtering image */
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
+  gap: 12px;
+  margin: 0 20px;
+}
+
+.tabButton {
+  background: transparent;
+  border: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+  color: #555;
+  padding: 6px 12px;
+  transition: color 0.2s, border-bottom 0.2s;
+}
+
+.tabButton:hover {
+  color: #000;
+}
+
+.active {
+  color: #000;
+  border-bottom: 2px solid #ffcc00;
 }
