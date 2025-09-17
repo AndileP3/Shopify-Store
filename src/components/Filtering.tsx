@@ -1,52 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "../styles/Filtering.module.css";
 
 const categoryImages: Record<string, string> = {
-  All: "https://www.orega.com/hubfs/OregaMarkLane_Reception_WithPeople2-1.jpg",
-  Woman: "https://www.orega.com/hubfs/OregaBroadGate_OfficeSpace_WithPeople.jpg",
-  Man: "https://www.orega.com/hs-fs/hubfs/virtual-office-header-3.png?width=1200&height=500",
-  Shirts: "https://www.orega.com/hs-fs/hubfs/Orega_GracechurchSt_Building.jpg?width=1200&height=500",
-  Socks: "https://www.orega.com/hubfs/OregaMarkLane_Reception_WithPeople2-1.jpg",
+  All: "https://img.ltwebstatic.com/v4/j/ccc/2025/09/12/97/175764372511920e9aa618a9714a8e0dcffaf3a3a5_thumbnail_912x.webp",
+  Woman: "https://img.ltwebstatic.com/v4/j/ccc/2025/09/12/39/1757645872cf64415e271709012de4d9b4339f2df8_thumbnail_912x.webp",
+  Man: "https://img.ltwebstatic.com/v4/j/ccc/2025/09/12/cb/1757659769c272d3a53456f4ca3387fd8ee905a126_thumbnail_912x.webp",
+  Shirts: "https://img.ltwebstatic.com/v4/j/ccc/2025/09/11/73/17575717270efee96a2fea8eb5502a3b3727710f82_thumbnail_912x.webp",
+  Socks: "https://img.ltwebstatic.com/v4/j/ccc/2025/09/04/48/175696610292dee6a7a381f4888975e80bc8118f9b_thumbnail_912x.webp",
 };
 
-const Filtering: React.FC = () => {
-  const [selected, setSelected] = useState<string>("All");
-  const [isFixed, setIsFixed] = useState<boolean>(false);
+interface FilteringProps {
+  selected: string;
+}
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 200) {
-        setIsFixed(true);
-      } else {
-        setIsFixed(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+const Filtering: React.FC<FilteringProps> = ({ selected }) => {
   return (
     <div
-      className={`${styles.filterWrapper} ${isFixed ? styles.fixed : ""}`}
+      className={styles.filterWrapper}
       style={{ backgroundImage: `url(${categoryImages[selected]})` }}
     >
-      <div className={styles.overlay}>
-        {/* Tabs */}
-        <div className={styles.tabs}>
-          {Object.keys(categoryImages).map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelected(category)}
-              className={`${styles.tabButton} ${
-                selected === category ? styles.active : ""
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-      </div>
+      <div className={styles.overlay}></div>
     </div>
   );
 };
