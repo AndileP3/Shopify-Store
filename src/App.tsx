@@ -4,20 +4,29 @@ import MultiProduct from "./components/Multi-Products";
 import SingleProduct from "./components/Single-Product";
 import { SearchProvider } from "./components/SearchContext";
 import Filtering from "./components/Filtering";
+import { useState } from "react";
 
 export const App = () => {
+  const [selected, setSelected] = useState("All");
+
   return (
-    <>
     <SearchProvider>
-      
-      <Heading />
-       <Filtering />
+      {/* Header always visible */}
+      <Heading selected={selected} setSelected={setSelected} />
+
       <Routes>
-        <Route path="/" element={<MultiProduct />} />
+        {/* Filtering only appears on MultiProduct */}
+        <Route
+          path="/"
+          element={
+            <>
+              <Filtering selected={selected} />
+              <MultiProduct />
+            </>
+          }
+        />
         <Route path="/product/:id" element={<SingleProduct />} />
       </Routes>
-
-      </SearchProvider>
-    </>
+    </SearchProvider>
   );
 };
