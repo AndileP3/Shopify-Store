@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/Heading.module.css";
-import logo from "../assets/logo.png";
+// import logo from "../assets/logo.png";
 import { useSearch } from "./SearchContext";
 import { useNavigate } from "react-router-dom";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
 
-const categories = ["All", "Woman", "Man", "Shirts", "Socks"];
+const categories = ["All", "Women", "Men", "Shirts", "Socks"];
 
 interface HeadingProps {
   selected: string;
@@ -35,12 +35,14 @@ const Heading: React.FC<HeadingProps> = ({ selected, setSelected }) => {
       className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}
     >
       {/* Logo */}
+      <div className={styles.topRow}>
       <div
         className={styles.logo}
         onClick={handleLogoClick}
         style={{ cursor: "pointer" }}
       >
-        <img src={logo} alt="Vintage Store Logo" className={styles.logoImage} />
+        <h3 className={styles.logoText}>VINTAGE</h3>
+        {/* <img src={logo} alt="Vintage Store Logo" className={styles.logoImage} /> */}
       </div>
 
       {/* Search */}
@@ -51,6 +53,12 @@ const Heading: React.FC<HeadingProps> = ({ selected, setSelected }) => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+      </div>
+        {/* Icons */}
+      <div className={styles.icons}>
+        <FaHeart className={styles.icon} title="Wishlist" />
+        <FaShoppingCart className={styles.icon} title="Cart" />
+      </div>
       </div>
 
       {/* Tabs */}
@@ -68,11 +76,7 @@ const Heading: React.FC<HeadingProps> = ({ selected, setSelected }) => {
         ))}
       </div>
 
-      {/* Icons */}
-      <div className={styles.icons}>
-        <FaHeart className={styles.icon} title="Wishlist" />
-        <FaShoppingCart className={styles.icon} title="Cart" />
-      </div>
+    
     </header>
   );
 };
