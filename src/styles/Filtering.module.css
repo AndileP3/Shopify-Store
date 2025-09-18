@@ -1,10 +1,10 @@
 .filterWrapper {
   position: relative;
   width: 100%;
-  height: 320px;
+  height: 420px;
   top: 0;
   background-size: cover;
-  background-position: center;
+  background-position: center bottom; /* 👈 focus on bottom part */
   border-radius: 0 0 12px 12px;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -13,7 +13,11 @@
   -moz-border-radius: 0 0 12px 12px;
   -ms-border-radius: 0 0 12px 12px;
   -o-border-radius: 0 0 12px 12px;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
 }
+
 
 /* When fixed after scrolling */
 .fixed {
