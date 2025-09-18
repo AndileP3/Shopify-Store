@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Heading from "./components/Heading";
-import MultiProduct from "./components/Multi-Products";
+import MultiProduct from "./components/SuperDeals";
 import SingleProduct from "./components/Single-Product";
 import { SearchProvider } from "./components/SearchContext";
 import Filtering from "./components/Filtering";
